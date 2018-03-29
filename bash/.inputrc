@@ -1,0 +1,5 @@
+# Auto-complete case-insensitively. So useful; not sure why this isn't default.
+set completion-ignore-case on
+
+# Don't require double-tabbing if completion prefix not yet specific enough.
+set show-all-if-ambiguous on
