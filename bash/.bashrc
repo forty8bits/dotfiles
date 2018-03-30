@@ -14,6 +14,10 @@ shopt -s globstar
 # of $LINES and $COLUMNS.
 shopt -s checkwinsize
 
+# Enable less handling of some other filetypes beyond plain text; rarely used,
+# but a potentially useful carryover from Ubuntu MATE 17.10's default .bashrc.
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 # Enable bash completions; copied from Ubuntu MATE 17.10's default .bashrc.
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
@@ -22,6 +26,22 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# Enable colour support in some commonly used utilities.
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# Keep Ubuntu MATE 17.10's useful ls aliases.
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
 
 # Make sure git prompt functions are available in subshells, e.g. pipenv shell.
 export -f __git_eread
@@ -53,6 +73,9 @@ vagrant() {
     command vagrant "$@"
   fi
 }
+
+# Include user's own bin dir in $PATH; pip --user installs here by default.
+export PATH="$HOME/.local/bin:$PATH"
 
 # Enable completion for pipenv commands.
 eval "$(pipenv --completion)"
