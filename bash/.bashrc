@@ -49,8 +49,7 @@ export -f __git_ps1
 export -f __git_ps1_colorize_gitstring
 export -f __git_ps1_show_upstream
 
-# I like a simple, but thoroughly git-aware, prompt. It's all dimmed; user input
-# should have focus, not a flashy prompt.
+# I like a simple, but thoroughly git-aware, prompt.
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
